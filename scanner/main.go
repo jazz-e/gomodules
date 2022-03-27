@@ -9,9 +9,9 @@ import (
 func main() {
 	var wg sync.WaitGroup
 	for i := 1; i <= 1024; i++ {
-		wg.Add(1)
+		wg.Add(1) // increment to a counter
 		go func(j int) {
-			defer wg.Done()
+			defer wg.Done() // decrement the counter
 			address := fmt.Sprintf("scanme.nmap.org:%d", j)
 			conn, err := net.Dial("tcp", address)
 
@@ -25,5 +25,5 @@ func main() {
 			fmt.Printf("%d open\n", j)
 		}(i)
 	}
-	wg.Wait()
+	wg.Wait() //wait till counter gets to nil
 }
